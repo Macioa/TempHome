@@ -1,0 +1,26 @@
+{
+  "name": "temphome",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Macioa/TempHome.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Macioa/TempHome/issues"
+  },
+  "homepage": "https://github.com/Macioa/TempHome#readme",
+  "dependencies": {
+    "bufferutil": "4.0.0",
+    "express": "4.16.3",
+    "utf-8-validate": "5.0.1",
+    "ws": "6.0.0"
+  }
+}
