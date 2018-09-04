@@ -39,16 +39,20 @@ const getTime=()=>{
 //initialize global server vars
 const users = {};
 const log = [];
+var guestCount=0;
 
 
 //set up connection event
 wss.on('connection', (ws, req) => {
     //initialize connection
-    let name = 'Guest';
     let ip = req.headers['x-forwarded-for'] || ws._socket.remoteAddress;
 
+
     if (users[ip]) users[ip].connected=true;
-    else users[ip]={ 'name':name, 'connected':true }
+    else {
+      let name = `Guest${guestCount}`; guestCount++;
+      users[ip]={ 'name':name, 'connected':true }
+    }
 
     console.log('Client connected', ip);
 
