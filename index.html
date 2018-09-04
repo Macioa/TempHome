@@ -10,7 +10,7 @@
 .userlistcontainer{
     background-color: blue;
     display:grid;
-    grid-template-columns: auto 50px;
+    grid-template-columns: auto 30px;
     grid-column-start: 1;
     grid-column-end: 2;
     border-style: solid;
@@ -50,7 +50,7 @@
 .main{
     position: fixed;
     display: grid;
-    grid-template-rows: auto 50px;
+    grid-template-rows: auto 40px;
     height:100%;
     width:100%;
     z-index: 5;
@@ -67,28 +67,42 @@
 }
 .actionbutton{
     position:relative;
-    width:50px;
-    height:50px;
-    top:50px;
+    width:30px;
+    height:30px;
+    top:250px;
 }
 .collapseContent{
-    grid-template-columns: 55px auto;
+    grid-template-columns: 35px auto;
 }
 .expendContent{
     grid-template-columns: 20% 80%;
 }
 .collapseUserListContainer{
-    grid-template-columns: 0 55px;
+    grid-template-columns: 0 35px;
 }
 .expandUserListContrainer{
-    grid-template-columns: auto 50px;
+    grid-template-columns: auto 35px;
 }
 form{
-    margin: auto 0;
-    padding: 10px;
+    margin: auto;
+    padding: 7px;
 }
 #name{
     width:50px;
+}
+#message{
+    width:40%;
+}
+input{
+    border-radius: 5px;
+}
+ul{
+    list-style-type: circle;
+}@media (max-width: 500px) {
+    ul{
+        list-style-type: none;
+        padding-left: 0;
+    }
 }
 
 </style>
@@ -101,13 +115,13 @@ form{
                         <ul id='userlist' class='userlist'></ul>
                     </div>
                     <div class='userbuttoncolumn'>
-                        <img id='userbutton' class='actionbutton' src='https://png.icons8.com/ios/1600/circled-chevron-right.png'>
+                        <img id='userbutton' class='actionbutton' src='https://png.icons8.com/ios/1600/circled-chevron-left.png'>
                     </div>
                 </div>
                 <div id='display' class='display'></div>
             </div>
             <div class='prompt'>
-                <form>
+                <form onsubmit="SEND()">
                     <input id='name' type='text' placeholder='Name' />
                     <input id='message' type='text' placeholder='Message'/>
                     <input type='button' onclick='SEND()' value='Send'>
@@ -130,13 +144,16 @@ form{
             };
 
             function SEND(e){
-                let name = document.getElementById('name').value.replace(/[^a-zA-Z0-9_-]/g,'');
-                let mes = document.getElementById('message').value.replace(/[^a-zA-Z0-9_-]/g,'');
+                let name = document.getElementById('name').value.replace(/[^a-zA-Z0-9!.']/g,'');
+                let messIn = document.getElementById('message');
+                let mes = messIn.value.replace(/[^a-zA-Z0-9!.']/g,'');
+                
                 ws.send(JSON.stringify({'name':name,'message':mes}));
+                messIn.value=''; messIn.focus();
                 return false;
             }
 
-            const state = {userExpand:false, resExpand:true}
+            const state = {userExpand:true, resExpand:true}
 
             function toggleUsers(e){
                 state.userExpand=!state.userExpand;
@@ -144,14 +161,15 @@ form{
                     document.getElementById('content').className='content expandContent'
                     document.getElementById('userlistcontainer').className='userlistcontainer expandUserListContainer'
                     document.getElementById('usercontentcolumn').style.display='initial'
-                    document.getElementById('userbutton').source='https://png.icons8.com/ios/1600/circled-chevron-left.png'
+                    document.getElementById('userbutton').src='https://png.icons8.com/ios/1600/circled-chevron-left.png'
                 } else {
                     document.getElementById('content').className='content collapseContent'
                     document.getElementById('userlistcontainer').className='userlistcontainer collapseUserListContainer'
                     document.getElementById('usercontentcolumn').style.display='none'
-                    document.getElementById('userbutton').source='https://png.icons8.com/ios/1600/circled-chevron-right.png'
+                    document.getElementById('userbutton').src='https://png.icons8.com/ios/1600/circled-chevron-right.png'
                 }
             }
+            toggleUsers(false);
         </script>
     </body>   
 </html>
