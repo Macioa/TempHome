@@ -7,11 +7,22 @@ var server = express()
 
 
 const wss = new ws.Server({ server });
+const broadcast = (data) =>{ wss.clients.forEach((client)=> {
+
+})}
+
+const users = {};
+const log = [];
 
 wss.on('connection', (ws, req) => {
-    console.log('Client connected', ws._socket.remoteAddress);
-    ws.on('close', () => console.log('Client disconnected'));
-    ws.on('message', (message)=>{console.log(message)})
+    let name = 'Guest';
+    let ip = req.headers['x-forwarded-for'] || ws._socket.remoteAddress;
+
+    console.log('Client connected', ip);
+
+    ws.on('close', ()=> {console.log('Client disconnected', ip)});
+
+    ws.on('message', (message)=> {console.log(message)})
   });
 
 
