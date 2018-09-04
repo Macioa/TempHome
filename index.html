@@ -20,6 +20,8 @@
     grid-column-start: 2;
     grid-column-end: 3;
     border-style: solid;
+    padding: 15px 5px;
+    overflow-y: scroll;
 }
 .prompt{
     background-color:purple;
@@ -50,7 +52,7 @@
 .main{
     position: fixed;
     display: grid;
-    grid-template-rows: auto 40px;
+    grid-template-rows: 90vh 40px;
     height:100vh;
     width:100vw;
     z-index: 5;
@@ -163,15 +165,21 @@ ul{
                 let data = JSON.parse(event.data);
                 display.innerHTML =  data.log;
                 userlist.innerHTML = data.users;
+                display.scrollTop = display.scrollHeight;
             };
 
             function SEND(e){
-                let name = document.getElementById('name').value.replace(/[^a-zA-Z0-9!.']/g,'');
+                let nameIn = document.getElementById('name')
+                let name = nameIn.value.replace(/[^a-zA-Z0-9!.']/g,'');
                 let messIn = document.getElementById('message');
                 let mes = messIn.value.replace(/[^a-zA-Z0-9!.']/g,'');
 
-                ws.send(JSON.stringify({'name':name,'message':mes}));
+                console.log(messIn.value)
+                if (messIn.value.length)
+                    ws.send(JSON.stringify({'name':name,'message':mes}));
                 messIn.value=''; if (!mobile) messIn.focus();
+                display.scrollTop = display.scrollHeight;
+                console.log(display.scrollHeight)
                 return false;
             }
 
