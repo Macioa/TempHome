@@ -129,10 +129,20 @@ ul{
         </div>
         <div class='res'></div>
         <script>
+
+            //handle mobile
             var mobile = false;
             if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
                 mobile = true;
+            function zoomOutMobile() {
+                var viewport = document.querySelector('meta[name="viewport"]');
 
+                if ( viewport ) 
+                    viewport.content = "initial-scale=0.01";
+            }
+            if (mobile) zoomOutMobile();
+            
+            //set up sockets
             var HOST = location.origin.replace(/^http/, 'ws');
 
             var ws = new WebSocket(HOST);
@@ -156,6 +166,7 @@ ul{
                 return false;
             }
 
+            //handle UI state
             const state = {userExpand:true, resExpand:true}
 
             function toggleUsers(e){
@@ -171,6 +182,7 @@ ul{
                     document.getElementById('usercontentcolumn').style.display='none'
                     document.getElementById('userbutton').src='https://png.icons8.com/ios/1600/circled-chevron-right.png'
                 }
+                zoomOutMobile();
             }
             toggleUsers(false);
         </script>
