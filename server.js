@@ -11,7 +11,7 @@ const wss = new ws.Server({ server });
 wss.on('connection', (ws, req) => {
     console.log('Client connected', req.headers.origin);
     ws.on('close', () => console.log('Client disconnected'));
-    ws.on('message', (message)=>{console.log(ws); console.log(message)})
+    ws.on('message', (message)=>{console.log(message)})
   });
 
 
