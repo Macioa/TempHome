@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ryan Montgomery</title>
 </head>
@@ -130,6 +130,10 @@ ul{
         </div>
         <div class='res'></div>
         <script>
+            var mobile = false;
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+                mobile = true;
+
             var HOST = location.origin.replace(/^http/, 'ws');
 
             var ws = new WebSocket(HOST);
@@ -147,9 +151,9 @@ ul{
                 let name = document.getElementById('name').value.replace(/[^a-zA-Z0-9!.']/g,'');
                 let messIn = document.getElementById('message');
                 let mes = messIn.value.replace(/[^a-zA-Z0-9!.']/g,'');
-                
+
                 ws.send(JSON.stringify({'name':name,'message':mes}));
-                messIn.value=''; messIn.focus();
+                messIn.value=''; if (!mobile) messIn.focus();
                 return false;
             }
 
