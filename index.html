@@ -179,7 +179,7 @@ ul{
                     ws.send(JSON.stringify({'name':name,'message':mes}));
                 messIn.value=''; if (!mobile) messIn.focus();
                 display.scrollTop = display.scrollHeight;
-                console.log(display.scrollHeight)
+                if (mobile) messIn.blur();
                 return false;
             }
 
