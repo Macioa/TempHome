@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ryan Montgomery</title>
+</head>
+<html>
+    <body>
+      <p id='server-time'></p>
+      <form>
+        <input id='name' type='text' placeholder='Name'/>
+        <input id='message' type='text' placeholder='Message'/>
+        <input type='button' onclick='SEND()' value='Send'>
+      </form>
+      <script>
+        var HOST = location.origin.replace(/^http/, 'ws');
+        //var HOST = 'ws://localhost:3000'
+        console.log(HOST)
+        var ws = new WebSocket(HOST);
+        var el = document.getElementById('server-time');
+        ws.onmessage = function (event) {
+          el.innerHTML = 'Server time: ' + event.data;
+        };
+
+        function SEND(e){
+          let name = document.getElementById('name').value
+          let mes = document.getElementById('message').value
+          ws.send({'name':name,'message':mes})
+          return false
+        }
+      </script>
+    </body>
+  </html>

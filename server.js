@@ -13,17 +13,28 @@ const broadcast = () =>{ wss.clients.forEach( (client)=> {
 
   var userlisthtml = '';
   for (let ip in users)
-    if (users[ip].connected) userlisthtml+=(`<li class='userli'>${user[ip].name}</li>`);
+    if (users[ip].connected) userlisthtml+=(`<li class='userli'>${users[ip].name}</li>`);
 
-  var loghtml = log.map(entry=>`<span class='username'>${users[entry.ip].name}: </span>` + entry.event?
+  var loghtml = log.map(entry=>`<span class='username'>${users[entry.ip].name} </span>` + 
+                  `<span class='time'>|${entry.time}|</span> &#187   ` +
+                  (entry.event?
                     `<span class='event'>${entry.event}</span>`
                     :
-                    `<span class='message'>${entry.message}</span>`
-  ).join()
+                    `<span class='message'>${entry.message}</span>`) +
+                    '<br/>'
+  ).join().replace(/,/g,'')
   
-  client.send( {'users':userlisthtml, 'log':loghtml} );
+  // console.log(users)
+  // console.log(userlisthtml)
+  // console.log(JSON.stringify({'users':userlisthtml, 'log':loghtml}))
+  client.send( JSON.stringify({'users':userlisthtml, 'log':loghtml}) );
 })}
 
+const getTime=()=>{
+  let date = new Date();
+  date = date.getHours()%12+'<span>&#58</span>'+date.getMinutes()+'<span>&#58</span>'+date.getSeconds()
+  return date
+}
 
 //initialize global server vars
 const users = {};
@@ -40,20 +51,25 @@ wss.on('connection', (ws, req) => {
     else users[ip]={ 'name':name, 'connected':true }
 
     console.log('Client connected', ip);
-    log.push({'ip':ip, 'event':'connected'})
+
+    log.push({'ip':ip, 'event':'Connected', 'time':getTime()})
     broadcast();
 
     //set up connection events
     ws.on('close', ()=> {
       console.log('Client disconnected', ip);
       users[ip].connected=false;
-      log.push({'ip':ip, 'event':'disconnected'})
+
+      log.push({'ip':ip, 'event':'Disconnected', 'time':getTime()})
       broadcast();
     });
 
     ws.on('message', (data)=> {
+      data = JSON.parse(data)
       if (data.name!='') users[ip].name=data.name;
-      log.push({'ip':ip, 'message':data.message})
+      console.log(ip, data.message)
+
+      log.push({'ip':ip, 'message':data.message, 'time':getTime()})
       broadcast();
     })
   });
