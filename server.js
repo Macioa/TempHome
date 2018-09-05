@@ -2,7 +2,7 @@ var express = require('express')
 var ws = require('ws')
 var PORT = process.env.PORT || 3000
 var server = express()
-  .use((req, res) => res.sendFile(__dirname+'/index.html') )
+  .get('/',(req, res) => res.sendFile(__dirname+'/index.html') )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 
@@ -24,9 +24,6 @@ const broadcast = () =>{ wss.clients.forEach( (client)=> {
                     '<br/>'
   ).join().replace(/,/g,'')
   
-  // console.log(users)
-  // console.log(userlisthtml)
-  // console.log(JSON.stringify({'users':userlisthtml, 'log':loghtml}))
   client.send( JSON.stringify({'users':userlisthtml, 'log':loghtml}) );
 })}
 

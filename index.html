@@ -8,7 +8,7 @@
 </head>
 <style>
 .userlistcontainer{
-    background-color: blue;
+    background-color: lightsteelblue;
     display:grid;
     grid-template-columns: auto 30px;
     grid-column-start: 1;
@@ -16,7 +16,7 @@
     border-style: solid;
 }
 .display{
-    background-color: red;
+    background-color: lightgray;
     grid-column-start: 2;
     grid-column-end: 3;
     border-style: solid;
@@ -24,7 +24,7 @@
     overflow-y: scroll;
 }
 .prompt{
-    background-color:purple;
+    background-color:rgb(192, 208, 224);
     border-style:solid;
     width: 100%;
     grid-row-start: 2;
@@ -39,20 +39,20 @@
     transition-property: grid;
     transition-duration: 1s;
 }
-.res{
-    background-color:aqua;
+.rescontainer{
+    background-color:rgb(245, 237, 227);
     border-style: solid;
-    width:80px;
-    height:1000px;
+    grid-template-columns: 30px auto;
     position:absolute;
     right:0px;
     top:0px;
     z-index: 99;
+    transition: width 1.5s;
 }
 .main{
     position: fixed;
     display: grid;
-    grid-template-rows: 90vh 40px;
+    grid-template-rows: 88vh 40px;
     height:100vh;
     width:100vw;
     z-index: 5;
@@ -67,11 +67,20 @@
     grid-column-start: 2;
     grid-column-end: 3;
 }
+.resbuttoncolumn{
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+.resume{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    text-align: center;
+}
 .actionbutton{
     position:relative;
     width:30px;
     height:30px;
-    top:250px;
+    top:45vh;
 }
 .collapseContent{
     grid-template-columns: 35px auto;
@@ -84,6 +93,16 @@
 }
 .expandUserListContrainer{
     grid-template-columns: auto 35px;
+}
+.collapseResContainer{
+    width: 35px;
+    grid-template-columns: 35px auto;
+    height: 100vh;
+}
+.expandResContainer{
+    width: 95%;
+    grid-template-columns: 35px auto;
+    height: auto;
 }
 form{
     margin: auto;
@@ -122,6 +141,7 @@ ul{
             <div id='content' class='content' onclick='toggleUsers()'>
                 <div id='userlistcontainer' class='userlistcontainer'>
                     <div id='usercontentcolumn' class='usercontent'>
+                        <h5>Online</h5>
                         <ul id='userlist' class='userlist'></ul>
                     </div>
                     <div class='userbuttoncolumn'>
@@ -138,20 +158,99 @@ ul{
                 </form>
             </div>
         </div>
-        <div class='res'></div>
+        <div id='rescontainer' class='rescontainer'>
+            <div class='resbuttoncolumn' onclick='toggleRes()'>
+                <img id='resbutton' class='actionbutton' src='https://png.icons8.com/ios/1600/circled-chevron-right.png'>
+            </div>
+            <div id='resume' class='resume'>
+                <h3>Ryan Montgomery</h3>
+                <ul>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+                    <li>asdfafdasdf</li>
+
+                </ul>
+            </div>
+        </div>
         <script>
 
             //handle mobile
             var mobile = false;
             if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
                 mobile = true;
-            function zoomOutMobile() {
-                var viewport = document.querySelector('meta[name="viewport"]');
-
-                if ( viewport ) 
-                    viewport.content = "initial-scale=1.0";
-            }
-            if (mobile) zoomOutMobile();
             
             //set up sockets
             var HOST = location.origin.replace(/^http/, 'ws');
@@ -168,23 +267,29 @@ ul{
                 display.scrollTop = display.scrollHeight;
             };
 
+            ws.onclose = function (event) {
+                alert('Disconnected from server. Refresh the page to reconnect.');
+                document.getElementById('main').style.display='none'
+            }
+
             function SEND(e){
                 let nameIn = document.getElementById('name')
-                let name = nameIn.value.replace(/[^a-zA-Z0-9!.']/g,'');
+                let name = nameIn.value.replace(/[^a-zA-Z0-9!.?$']/g,'');
                 let messIn = document.getElementById('message');
-                let mes = messIn.value.replace(/[^a-zA-Z0-9!.']/g,'');
+                let mes = messIn.value.replace(/[^a-zA-Z0-9!.?$']/g,'');
 
                 console.log(messIn.value)
                 if (messIn.value.length)
                     ws.send(JSON.stringify({'name':name,'message':mes}));
-                messIn.value=''; if (!mobile) messIn.focus();
+                messIn.value='';
                 display.scrollTop = display.scrollHeight;
                 if (mobile) messIn.blur();
+                else messIn.focus();
                 return false;
             }
 
             //handle UI state
-            const state = {userExpand:true, resExpand:true}
+            const state = {userExpand:true, resExpand:false}
 
             document.addEventListener('keydown', (event) => { if (event.which == 13 || event.keyCode == 13) SEND(event) })
 
@@ -201,8 +306,22 @@ ul{
                     document.getElementById('usercontentcolumn').style.display='none'
                     document.getElementById('userbutton').src='https://png.icons8.com/ios/1600/circled-chevron-right.png'
                 }
-                zoomOutMobile();
             }
+            function toggleRes(e){
+                state.resExpand=!state.resExpand;
+                if (state.resExpand){
+                    document.getElementById('rescontainer').className='rescontainer expandResContainer'
+                    //document.getElementById('userlistcontainer').className='userlistcontainer expandUserListContainer'
+                    document.getElementById('resume').style.display='initial'
+                    document.getElementById('resbutton').src='https://png.icons8.com/ios/1600/circled-chevron-right.png'
+                } else {
+                    document.getElementById('rescontainer').className='rescontainer collapseResContainer'
+                    //document.getElementById('userlistcontainer').className='userlistcontainer expandUserListContainer'
+                    document.getElementById('resume').style.display='none'
+                    document.getElementById('resbutton').src='https://png.icons8.com/ios/1600/circled-chevron-left.png'
+                }
+            }
+            toggleRes(false);
             toggleUsers(false);
         </script>
     </body>   
