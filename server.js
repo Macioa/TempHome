@@ -29,7 +29,7 @@ const broadcast = () =>{ wss.clients.forEach( (client)=> {
 
 const getTime=()=>{
   let date = new Date();
-  date = date.getHours()%12+'<span>&#58</span>'+date.getMinutes()+'<span>&#58</span>'+date.getSeconds()
+  date = (date.getHours()%12+4)+'<span>&#58</span>'+date.getMinutes()+'<span>&#58</span>'+date.getSeconds()
   return date
 }
 
