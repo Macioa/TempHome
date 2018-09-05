@@ -52,11 +52,12 @@
     top:0px;
     z-index: 99;
     transition: width 1.5s;
+    padding: 3%;
 }
 .main{
     position: fixed;
     display: grid;
-    grid-template-rows: 88vh 40px;
+    grid-template-rows: 80vh 40px;
     height:100vh;
     width:100vw;
     z-index: 5;
@@ -171,7 +172,7 @@ ul{
     border-style:solid;
     border-radius: 25px;
     margin: 4% 0;
-    padding: 4%;
+    padding: 3%;
 }
 </style>
 <html>
@@ -205,7 +206,16 @@ ul{
                 <h1 style="font-family: 'Cinzel Decorative', cursive;">Ryan Montgomery</h1>
                 <h6><a href="tel:+15129529352">512.952.9352</a> &#9826 <a href="mailto:macioa.macioa@gmail.com">macioa.macioa@gmail.com</a></h6>
                 <h3>Web &#9826 Software &#9826 Development</h3>
-                <p>I'm a passionate developer looking to utilize my experience in product management and development in Web.</p>
+                <p>I'm a passionate programmer looking to utilize my experience in product management and development in Web.</p>
+                <ul>
+                    <li><a href="">LinkedIn</a></li>
+                    <li><a href="">GitHub</a></li>
+                    <li><a href="">Twitter</a></li>
+                </ul>
+                <div class="resitemcontainer">
+                    <h5>Skills</h5>
+                    <p>Javascript &#9826 Python &#9826 C++ &#9826 Elixir &#9826 Node &#9826 React &#9826 &#9826 Mongo &#9826 PostgreSQL &#9826 MySQL &#9826 Agile &#9826 Waterfall &#9826 OOP &#9826 Functional</p>
+                </div>
                 <div class="resoutercontainer">
                 <h3>Projects</h3>
                     <div class="resitemcontainer">
@@ -237,6 +247,14 @@ ul{
                         <p>A modification of a todolist-type classroom tutorial, this was an excersize improving UI components with React. MERN</p>
                     </div>
                 </div>
+                <div class="resoutercontainer">
+                    <h3>Experience</h3>
+                        <div class="resitemcontainer">
+                            <h6>Live Chat Resume</h6>
+                            <p>You're looking at it. Written in one day, this project uses WebSockets to allow the server and clients to communicate in real time over a TCP connection with a simple Express server. It uses CSS and Javascript to create easy to use, presentable, and responsive interactions with anyone who's taken the time to view my site.</p>
+                        </div>
+                     </div>
+                </div>
             </div>
         </div>
         <script>
@@ -256,12 +274,15 @@ ul{
             var missedMessages = 0;
 
             ws.onmessage = function (event) {
-                let data = JSON.parse(event.data);
-                display.innerHTML =  data.log;
-                userlist.innerHTML = data.users;
-                display.scrollTop = display.scrollHeight;
-                if ((state.resExpand)&&(missedMessages>3)) { toggleRes(false); missedMessages=0; }
-                else if (state.resExpand) missedMessages++;
+                try { 
+                    let data = JSON.parse(event.data);
+                    display.innerHTML =  data.log;
+                    userlist.innerHTML = data.users;
+                    display.scrollTop = display.scrollHeight; 
+        
+                    if ((state.resExpand)&&(missedMessages>=2)) { toggleRes(false); missedMessages=0; }
+                    else if (state.resExpand) missedMessages++;
+                } catch {}
             };
 
             ws.onclose = function (event) {
@@ -307,9 +328,11 @@ ul{
             function toggleRes(e){
                 state.resExpand=!state.resExpand;
                 if (state.resExpand){
-                    document.getElementById('rescontainer').className='rescontainer expandResContainer'
+                    let rescontainer = document.getElementById('rescontainer')
+                    rescontainer.className='rescontainer expandResContainer'
                     document.getElementById('resume').style.display='initial'
                     document.getElementById('resbutton').src='https://png.icons8.com/ios/1600/circled-chevron-right.png'
+                    rescontainer.scrollTop = rescontainer.scrollHeight;
                 } else {
                     document.getElementById('rescontainer').className='rescontainer collapseResContainer'
                     document.getElementById('resume').style.display='none'
