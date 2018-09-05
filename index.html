@@ -5,19 +5,20 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ryan Montgomery</title>
+    <link href="https://fonts.googleapis.com/css?family=Abel|Chango|Cinzel+Decorative|Open+Sans+Condensed:300|Philosopher" rel="stylesheet">
 </head>
 <style>
 .userlistcontainer{
-    background-color: rgb(37, 91, 153);
+    background-color: rgb(191, 196, 202);
     display:grid;
     grid-template-columns: auto 30px;
     grid-column-start: 1;
     grid-column-end: 2;
     border-style: solid;
-    color: lightseagreen;
+    color: rgb(21, 61, 59);
 }
 .display{
-    background-color: lightgray;
+    background-color: white;
     grid-column-start: 2;
     grid-column-end: 3;
     border-style: solid;
@@ -25,12 +26,12 @@
     overflow-y: scroll;
 }
 .prompt{
-    background-color:rgb(37, 91, 153);
+    background-color:rgb(92, 100, 109);
     border-style:solid;
     width: 100%;
     grid-row-start: 2;
     grid-row-end: 3;
-    color: lightseagreen;
+    color: rgb(21, 61, 59);
 }
 .content{
     display: grid;
@@ -42,7 +43,7 @@
     transition-duration: 1s;
 }
 .rescontainer{
-    background-color:rgb(245, 237, 227);
+    background-color:rgb(245, 242, 238);
     border-style: solid;
     display:grid;
     grid-template-columns: 30px auto;
@@ -66,6 +67,9 @@
     grid-column-start: 1;
     grid-column-end: 2;
 }
+.userlist{
+    font-family: 'Chango', cursive;
+}
 .userbuttoncolumn{
     grid-column-start: 2;
     grid-column-end: 3;
@@ -78,6 +82,7 @@
     grid-column-start: 2;
     grid-column-end: 3;
     text-align: center;
+    font-family: 'Philosopher', sans-serif;
 }
 .actionbutton{
     position:fixed;
@@ -140,16 +145,33 @@ ul{
     }
 }
 .username{
-    color: blue;
+    color: rgb(19, 19, 102);
+    font-family: 'Chango', cursive;
+    font-size: 10px;
 }
 .time{
     color: darkolivegreen;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 10px;
 }
 .event{
     color:goldenrod;
+    font-family: 'Abel', sans-serif;
 }
 .message{
     color:black;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+.resitemcontainer{
+    border-style:solid;
+    border-radius: 20px;
+    margin: 15px 15px 15px;
+}
+.resoutercontainer{
+    border-style:solid;
+    border-radius: 25px;
+    margin: 25px 15% 25px;
+    padding: 12px;
 }
 </style>
 <html>
@@ -158,7 +180,7 @@ ul{
             <div id='content' class='content' onclick='toggleUsers()'>
                 <div id='userlistcontainer' class='userlistcontainer'>
                     <div id='usercontentcolumn' class='usercontent'>
-                        <h5>Online</h5>
+                        <h5 style="font-family: 'Abel', sans-serif;">Online</h5>
                         <ul id='userlist' class='userlist'></ul>
                     </div>
                     <div class='userbuttoncolumn'>
@@ -180,86 +202,41 @@ ul{
                     <img id='resbutton' class='actionbutton' style='top:45vh' src='https://png.icons8.com/ios/1600/circled-chevron-right.png'>
             </div>
             <div id='resume' class='resume'>
-                <h3>Ryan Montgomery</h3>
-                <ul>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-                        <li>asdfafdasdf</li>
-    
-                    </ul>
+                <h1 style="font-family: 'Cinzel Decorative', cursive;">Ryan Montgomery</h1>
+                <h6><a href="tel:+15129529352">512.952.9352</a> &#9826 <a href="mailto:macioa.macioa@gmail.com">macioa.macioa@gmail.com</a></h6>
+                <h3>Web &#9826 Software &#9826 Development</h3>
+                <p>I'm a passionate developer looking to utilize my experience in product management and development in Web.</p>
+                <div class="resoutercontainer">
+                <h3>Projects</h3>
+                    <div class="resitemcontainer">
+                        <h6>Live Chat Resume</h6>
+                        <p>You're looking at it. Written in one day, this project uses WebSockets to allow the server and clients to communicate in real time over a TCP connection with a simple Express server. It uses CSS and Javascript to create easy to use, presentable, and responsive interactions with anyone who's taken the time to view my site.</p>
+                    </div>
+                    <div class="resitemcontainer">
+                        <h6><a href='https://lumpy-plants.surge.sh' target="_blank">Board Game</a></h6>
+                        <p>A javascript board game with ThreeJS. I have a lot of experience working with CAD and 3D scan data. ThreeJS allowed me to utilize my experience working in 3D environments to create an immersive interactive experience. </p>
+                    </div>
+                    <div class="resitemcontainer">
+                        <h6><a href='http://rmont44.mystudenthosting.com/index.html' target="_blank">Vocabulary Trainer</a></h6>
+                        <p>Originally written as a python script in 2016 for online classes I was taking, this project was my first attempt at HTML, CSS, and Javascript. This iteration was created in 2017 during a course on Web Development and utilizes GoogleTranslate.</p>
+                    </div>
+                    <div class="resitemcontainer">
+                        <h6><a h ref='https://mixshoulders.herokuapp.com' target="_blank">MixShoulders</a></h6>
+                        <p>This project was intended primarily as an introduction to the Elixir Phoenix framework. A personal focus during my time at GA was to improve my understanding and capabilities of functional programming. Elixir is a functional programming language that compiles to bytecode and is built on the Erlang vm with syntax emulating Clojure and Ruby. Phoenix is a full MVC package built on Elixir with a focus on fault tolerance and concurrent connections. MixShoulders is intended to honor the Computer Scientists and Engineers that made all of this possible. (Elixir Phoenix PostgreSQL) </p>
+                    </div>
+                    <div class="resitemcontainer">
+                        <h6><a href='https://userloginwidget.herokuapp.com' target="_blank">Login Widget</a></h6>
+                        <p>A practice project with the MERN stack and Material-UI. The backend uses a IP lookup endpoint to track login locations.</p>
+                    </div>
+                    <div class="resitemcontainer">
+                        <h6><a href='' target="_blank">Tomagatchi Spawner</a></h6>
+                        <p>Fun with Javascript</p>
+                    </div>
+                    <div class="resitemcontainer">
+                        <h6><a href='' target="_blank">Onclick Edit</a></h6>
+                        <p>A modification of a todolist-type classroom tutorial, this was an excersize improving UI components with React.</p>
+                    </div>
+                </div>
             </div>
         </div>
         <script>
