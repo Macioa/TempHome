@@ -8,12 +8,13 @@
 </head>
 <style>
 .userlistcontainer{
-    background-color: lightsteelblue;
+    background-color: rgb(37, 91, 153);
     display:grid;
     grid-template-columns: auto 30px;
     grid-column-start: 1;
     grid-column-end: 2;
     border-style: solid;
+    color: lightseagreen;
 }
 .display{
     background-color: lightgray;
@@ -24,11 +25,12 @@
     overflow-y: scroll;
 }
 .prompt{
-    background-color:rgb(192, 208, 224);
+    background-color:rgb(37, 91, 153);
     border-style:solid;
     width: 100%;
     grid-row-start: 2;
     grid-row-end: 3;
+    color: lightseagreen;
 }
 .content{
     display: grid;
@@ -42,6 +44,7 @@
 .rescontainer{
     background-color:rgb(245, 237, 227);
     border-style: solid;
+    display:grid;
     grid-template-columns: 30px auto;
     position:absolute;
     right:0px;
@@ -77,10 +80,9 @@
     text-align: center;
 }
 .actionbutton{
-    position:relative;
+    position:fixed;
     width:30px;
     height:30px;
-    top:45vh;
 }
 .collapseContent{
     grid-template-columns: 35px auto;
@@ -115,7 +117,7 @@ form{
     width:30vw;
 }
 input{
-    border-radius: 5px;
+    border-radius: 15px;
 }
 ul{
     list-style-type: circle;
@@ -125,6 +127,9 @@ ul{
         list-style-type: none;
         padding-left: 0;
     }
+    input{
+        width: 40px;
+    }
 }
 @media (max-height: 850px){
     input{
@@ -133,6 +138,18 @@ ul{
     form{
         padding: 1px 5%;
     }
+}
+.username{
+    color: blue;
+}
+.time{
+    color: darkolivegreen;
+}
+.event{
+    color:goldenrod;
+}
+.message{
+    color:black;
 }
 </style>
 <html>
@@ -145,7 +162,7 @@ ul{
                         <ul id='userlist' class='userlist'></ul>
                     </div>
                     <div class='userbuttoncolumn'>
-                        <img id='userbutton' class='actionbutton' src='https://png.icons8.com/ios/1600/circled-chevron-left.png'>
+                        <img id='userbutton' class='actionbutton' style='top:45vh' src='https://png.icons8.com/ios/1600/circled-chevron-left.png'>
                     </div>
                 </div>
                 <div id='display' class='display'></div>
@@ -154,95 +171,95 @@ ul{
                 <form onsubmit="SEND()">
                     <input id='name' type='text' placeholder='Name' />
                     <input id='message' type='text' placeholder='Message'/>
-                    <input type='button' onclick='SEND()' value='Send'>
+                    <input id='send' type='button' onclick='SEND()' value='>'>
                 </form>
             </div>
         </div>
         <div id='rescontainer' class='rescontainer'>
             <div class='resbuttoncolumn' onclick='toggleRes()'>
-                <img id='resbutton' class='actionbutton' src='https://png.icons8.com/ios/1600/circled-chevron-right.png'>
+                    <img id='resbutton' class='actionbutton' style='top:45vh' src='https://png.icons8.com/ios/1600/circled-chevron-right.png'>
             </div>
             <div id='resume' class='resume'>
                 <h3>Ryan Montgomery</h3>
                 <ul>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-                    <li>asdfafdasdf</li>
-
-                </ul>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+                        <li>asdfafdasdf</li>
+    
+                    </ul>
             </div>
         </div>
         <script>
@@ -274,9 +291,9 @@ ul{
 
             function SEND(e){
                 let nameIn = document.getElementById('name')
-                let name = nameIn.value.replace(/[^a-zA-Z0-9!.?$']/g,'');
+                let name = nameIn.value.replace(/[^a-zA-Z0-9!.?$ ']/g,'');
                 let messIn = document.getElementById('message');
-                let mes = messIn.value.replace(/[^a-zA-Z0-9!.?$']/g,'');
+                let mes = messIn.value.replace(/[^a-zA-Z0-9!.?$ ']/g,'');
 
                 console.log(messIn.value)
                 if (messIn.value.length)
