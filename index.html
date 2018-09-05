@@ -35,7 +35,7 @@
 }
 .content{
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 20% auto 45px;
     grid-row-start: 1;
     grid-row-end: 2;
     width: 100%;
@@ -90,10 +90,10 @@
     height:30px;
 }
 .collapseContent{
-    grid-template-columns: 35px auto;
+    grid-template-columns: 35px auto 35px;
 }
 .expendContent{
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 20% auto 35px;
 }
 .collapseUserListContainer{
     grid-template-columns: 0 35px;
@@ -165,13 +165,13 @@ ul{
 .resitemcontainer{
     border-style:solid;
     border-radius: 20px;
-    margin: 5%;
+    margin: 2%;
 }
 .resoutercontainer{
     border-style:solid;
     border-radius: 25px;
-    margin: 8% 0;
-    padding: 8%;
+    margin: 4% 0;
+    padding: 4%;
 }
 </style>
 <html>
@@ -253,13 +253,15 @@ ul{
 
             var display = document.getElementById('display');
             var userlist = document.getElementById('userlist')
+            var missedMessages = 0;
 
             ws.onmessage = function (event) {
                 let data = JSON.parse(event.data);
                 display.innerHTML =  data.log;
                 userlist.innerHTML = data.users;
                 display.scrollTop = display.scrollHeight;
-                if (resExpand) toggleRes(false);
+                if ((state.resExpand)&&(missedMessages>3)) { toggleRes(false); missedMessages=0; }
+                else if (state.resExpand) missedMessages++;
             };
 
             ws.onclose = function (event) {
