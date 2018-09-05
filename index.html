@@ -170,7 +170,7 @@ ul{
 .resoutercontainer{
     border-style:solid;
     border-radius: 25px;
-    margin: 8% 5%;
+    margin: 8% 0;
     padding: 8%;
 }
 </style>
@@ -221,7 +221,7 @@ ul{
                         <p>Originally written as a python script in 2016 for online classes I was taking, this project was my first attempt at HTML, CSS, and Javascript. This iteration was created in 2017 during a course on Web Development and utilizes GoogleTranslate.</p>
                     </div>
                     <div class="resitemcontainer">
-                        <h6><a h ref='https://mixshoulders.herokuapp.com' target="_blank">MixShoulders</a></h6>
+                        <h6><a href='https://mixshoulders.herokuapp.com' target="_blank">MixShoulders</a></h6>
                         <p>This project was intended primarily as an introduction to the Elixir Phoenix framework. A personal focus during my time at GA was to improve my understanding and capabilities of functional programming. Elixir is a functional programming language that compiles to bytecode and is built on the Erlang vm with syntax emulating Clojure and Ruby. Phoenix is a full MVC package built on Elixir with a focus on fault tolerance and concurrent connections. MixShoulders is intended to honor the Computer Scientists and Engineers that made all of this possible. (Elixir Phoenix PostgreSQL) </p>
                     </div>
                     <div class="resitemcontainer">
@@ -234,7 +234,7 @@ ul{
                     </div>
                     <div class="resitemcontainer">
                         <h6><a href='' target="_blank">Onclick Edit</a></h6>
-                        <p>A modification of a todolist-type classroom tutorial, this was an excersize improving UI components with React.</p>
+                        <p>A modification of a todolist-type classroom tutorial, this was an excersize improving UI components with React. MERN</p>
                     </div>
                 </div>
             </div>
@@ -259,6 +259,7 @@ ul{
                 display.innerHTML =  data.log;
                 userlist.innerHTML = data.users;
                 display.scrollTop = display.scrollHeight;
+                if (resExpand) toggleRes(false);
             };
 
             ws.onclose = function (event) {
@@ -305,12 +306,10 @@ ul{
                 state.resExpand=!state.resExpand;
                 if (state.resExpand){
                     document.getElementById('rescontainer').className='rescontainer expandResContainer'
-                    //document.getElementById('userlistcontainer').className='userlistcontainer expandUserListContainer'
                     document.getElementById('resume').style.display='initial'
                     document.getElementById('resbutton').src='https://png.icons8.com/ios/1600/circled-chevron-right.png'
                 } else {
                     document.getElementById('rescontainer').className='rescontainer collapseResContainer'
-                    //document.getElementById('userlistcontainer').className='userlistcontainer expandUserListContainer'
                     document.getElementById('resume').style.display='none'
                     document.getElementById('resbutton').src='https://png.icons8.com/ios/1600/circled-chevron-left.png'
                 }
