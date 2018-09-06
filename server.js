@@ -5,6 +5,8 @@ var server = express()
   .get('/',(req, res) => res.sendFile(__dirname+'/index.html') )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
+const { DateTime } = require('luxon');
+
 
 const wss = new ws.Server({ server });
 
@@ -28,9 +30,8 @@ const broadcast = () =>{ wss.clients.forEach( (client)=> {
 })}
 
 const getTime=()=>{
-  let date = new Date();
-  date = (date.getHours()%12+4)+'<span>&#58</span>'+date.getMinutes()+'<span>&#58</span>'+date.getSeconds()
-  return date
+  var date = DateTime.local().setZone('America/Chicago')
+  return date.toLocaleString(DateTime.TIME_WITH_SECONDS)
 }
 
 //initialize global server vars
