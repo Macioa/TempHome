@@ -1,6 +1,6 @@
-module.exports=(sequelize, Sequelize, force=false)=>{
+module.exports=(sequelize, Sequelize, force=true)=>{
   const Chat = sequelize.define('chat', {
-      userid: {
+      ip: {
         type: Sequelize.STRING, 
       },
       message: {
@@ -9,7 +9,7 @@ module.exports=(sequelize, Sequelize, force=false)=>{
       event: {
         type: Sequelize.STRING,
       },
-      date: {
+      time: {
         type: Sequelize.STRING,
       },
       createdAt: Sequelize.DATE,

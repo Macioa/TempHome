@@ -47,37 +47,48 @@ var guestCount=0;
 
 
 //set up connection event
-wss.on('connection', (ws, req) => {
+wss.on('connection', async (ws, req) => {
     //initialize connection
     let ip = req.headers['x-forwarded-for'] || ws._socket.remoteAddress;
 
 
     if (users[ip]) users[ip].connected=true;
     else {
-      let name = `Guest${guestCount}`; guestCount++;
+      let name = await router.getName(ip)||`Guest${guestCount}`; 
+      guestCount++;
       users[ip]={ 'name':name, 'connected':true }
     }
 
-    console.log('Client connected', ip);
+    console.log(chalk.yellow('Client connected', ip))
 
-    log.push({'ip':ip, 'event':'Connected', 'time':getTime()})
+    let event = {'ip':ip, 'event':'Connected', 'time':getTime()}
+    log.push(event)
+    router.addChat(event)
+    router.addUser({ip:ip,name:users[ip].name})
     broadcast();
 
     //set up connection events
     ws.on('close', ()=> {
-      console.log('Client disconnected', ip);
+      console.log(chalk.yellow('Client disconnected', ip))
       users[ip].connected=false;
 
-      log.push({'ip':ip, 'event':'Disconnected', 'time':getTime()})
+      let event = {'ip':ip, 'event':'Disconnected', 'time':getTime()}
+      log.push(event)
+      router.addChat(event)
       broadcast();
     });
 
     ws.on('message', (data)=> {
       data = JSON.parse(data)
-      if (data.name!='') users[ip].name=data.name;
+      if (data.name!='') {
+        users[ip].name=data.name
+        router.addUser({ip:ip, name:data.name})
+      }
       console.log(ip, data.message)
 
-      log.push({'ip':ip, 'message':data.message, 'time':getTime()})
+      let message = {'ip':ip, 'message':data.message, 'time':getTime()}
+      log.push(message)
+      router.addChat(message)
       broadcast();
     })
   });

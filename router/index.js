@@ -5,11 +5,14 @@ const chalk = require('chalk')
 
 const models = require('../models/')
 
+const mailer = require('../mailer')
+
 router.addUser = async(inputUser) => {
     try{
         let user = await models.user.findOne({ where: {ip: inputUser.ip} })
         if (!user) {
-            models.user.create(Object.assign(inputUser,{names:[inputUser.name]})).then(user=>console.log(chalk.green(`Created new user with ${user.ip}`))).catch(err=>console.error(chalk.red(err)))
+            user = await models.user.create(Object.assign(inputUser,{names:[inputUser.name]})).then(user=>console.log(chalk.green(`Created new user with ${user.ip}`))).catch(err=>console.error(chalk.red(err)))
+            mailer(`Log in from new user! ${user.ip}`,JSON.stringify(user))
         } else {
             let isNew = true, nameChanged=false
             user.names.forEach(existingName=>{if (inputUser.name==existingName) isNew=false})
@@ -23,18 +26,26 @@ router.addUser = async(inputUser) => {
                 user.update({ ip: user.ip, recentName: user.recentName, names: user.names}, {fields: ['names']}).then(()=>console.log(chalk.green(`Added name to user ${user.ip}`)))
             } else if (nameChanged)
                 user.update({ ip: user.ip, recentName: user.recentName, names: user.names}, {fields: ['recentName']}).then(()=>console.log(chalk.green(`Modified current name for user ${user.ip}`)))
+            mailer(`Log in from existing user. ${user.ip}`,JSON.stringify(user))
         }
     } catch(err){ console.error(chalk.red(err)) }
 }
 
-router.addChat = (chat) => {
+router.getName = async (ip) =>{
     try {
-        models.chat.create(Object.assign(chat,{names:[chat.name]})).then(chat=>console.log(`Logged "${chat.message}" from ${chat.userid}`))
-    } catch(err) {
-        console.error(chalk.red(err))
-    }
+        let user = await models.user.findOne({ where: {ip: ip} })
+        if (user)
+            return user.recentName
+        else return null
+    } catch (err) { console.error(chalk.red(err)); return null }
 }
 
-setTimeout(()=>router.addUser({ip:'1.1.1.2',name:'a'}),3000)
+router.addChat = (chat) => {
+    try {
+        models.chat.create(chat).then(chat=>console.log(chalk.green(`Logged "${chat.message||chat.event}" from ${chat.ip}`)))
+    } catch(err) { console.error(chalk.red(err)) }
+}
+
+//setTimeout(()=>router.addUser({ip:'1.1.1.2',name:'a'}),3000)
 
 module.exports=router
