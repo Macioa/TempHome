@@ -75,6 +75,7 @@ wss.on('connection', async (ws, req) => {
       let event = {'ip':ip, 'event':'Disconnected', 'time':getTime()}
       log.push(event)
       router.addChat(event)
+      router.logOut(ip)
       broadcast();
     });
 
@@ -82,7 +83,7 @@ wss.on('connection', async (ws, req) => {
       data = JSON.parse(data)
       if (data.name!='') {
         users[ip].name=data.name
-        router.addUser({ip:ip, name:data.name})
+        router.addUser({ip:ip, name:data.name},false)
       }
       console.log(ip, data.message)
 
