@@ -1,6 +1,9 @@
 var express = require('express')
 var ws = require('ws')
 var PORT = process.env.PORT || 3000
+
+require('./db')
+
 var server = express()
   .get('/',(req, res) => res.sendFile(__dirname+'/index.html') )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
