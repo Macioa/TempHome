@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Macioa/TempHome#readme",
   "dependencies": {
     "bufferutil": "4.0.0",
+    "chalk": "^2.4.1",
     "express": "4.16.3",
     "luxon": "^1.3.3",
     "pg": "^7.4.3",

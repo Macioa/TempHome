@@ -1,14 +1,15 @@
-var express = require('express')
-var ws = require('ws')
+const express = require('express')
+const ws = require('ws')
 var PORT = process.env.PORT || 3000
 
-//require('./db')
+const chalk = require('chalk')
+
 router = require('./router')
-router.test('2')
+
 
 var server = express()
   .get('/',(req, res) => res.sendFile(__dirname+'/index.html') )
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+  .listen(PORT, () => console.log(chalk.green(`Listening on ${ PORT }`)))
 
 const { DateTime } = require('luxon');
 

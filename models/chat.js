@@ -1,10 +1,6 @@
-const Sequelize = require('sequelize');
-
-class Chat{
-  constructor(sequelize, force=false){ 
-  this.sequelize=sequelize
-  sequelize.define('chat', {
-      uderid: {
+module.exports=(sequelize, Sequelize, force=false)=>{
+  const Chat = sequelize.define('chat', {
+      userid: {
         type: Sequelize.STRING, 
       },
       message: {
@@ -15,9 +11,13 @@ class Chat{
       },
       date: {
         type: Sequelize.STRING,
-      }
+      },
+      createdAt: Sequelize.DATE,
     }).sync({force: force});
-  }
-}
 
-module.exports=Chat
+  Chat.associate = function(models){
+    models.chat.belongsTo(models.user)
+  }
+
+  return Chat
+}

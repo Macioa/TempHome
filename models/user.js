@@ -1,18 +1,24 @@
-const Sequelize = require('sequelize');
 
-class User {
-  constructor(sequelize, force=false){
-    this.sequelize=sequelize
-    sequelize.define('user', {
+module.exports=(sequelize, Sequelize, force=false)=>{
+  const User = sequelize.define('user', {
       ip: {
         type: Sequelize.STRING, 
-        primaryKey: true
+        primaryKey: true,
+        createdAt: Sequelize.DATE,
       },
       names: {
-        type: Sequelize.ARRAY(Sequelize.TEXT)
+        type: Sequelize.ARRAY(Sequelize.TEXT),
+        updatedAt: Sequelize.DATE,
+      },
+      recentName:{
+        type: Sequelize.STRING, 
+        updatedAt: Sequelize.DATE,
       }
-    }).sync({force: force});
-  }
-}
+    }).sync({force: force})
 
-module.exports=User
+    User.associate = function(models) {
+        models.user.hasMany(models.chat);
+    };
+
+  return User
+}
