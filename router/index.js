@@ -12,7 +12,7 @@ router.addUser = async(inputUser, login=true) => {
         let user = await models.user.findOne({ where: {ip: inputUser.ip} })
         if (!user) {
             user = await models.user.create(Object.assign(inputUser,{names:[inputUser.name]})).then(user=>console.log(chalk.green(`Created new user with ${user.ip}`))).catch(err=>console.error(chalk.red(err)))
-            if (login)
+            if (login&&user)
                 mailer(`Log in from new user. ${user.ip}`,JSON.stringify(user))
         } else {
             let isNew = true, nameChanged=false
