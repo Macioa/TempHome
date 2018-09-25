@@ -17,7 +17,7 @@ var mailOptions = {
 
 const sendMail=(subject, message)=>{
     mailOptions.subject = subject
-    mailOptions.text = message
+    mailOptions.text = message+'/n/n https://ryanmontgomery.herokuapp.com'
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
             console.log(error);
