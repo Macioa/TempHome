@@ -1,6 +1,6 @@
 const express = require('express')
 const ws = require('ws')
-var PORT = process.env.PORT || 3000
+var PORT = process.env.PORT || 80
 
 const chalk = require('chalk')
 
