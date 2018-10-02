@@ -1,5 +1,6 @@
 const express = require('express')
 const http = require('http')
+const hostValidation = require('host-validation')
 const https = require('https')
 const ws = require('ws')
 var PORT = process.env.PORT || 80
@@ -9,24 +10,36 @@ const chalk = require('chalk')
 router = require('./router')
 
 
-var server = express()
+const server = express()
   .get('/',(req, res) => res.sendFile(__dirname+'/index.html') )
+  .get('*',(req, res) => res.send('404'))
 
 
 server.use(express.static(__dirname, { dotfiles: 'allow' } ))
-const SSL = require(__dirname+'/cert')
-var httpServer = express()
-var httpsServer = https.createServer(SSL, server)
+
+const httpServer = express(server)
 
 
-httpServer.listen(80, ()=>{console.log(chalk.green('Http listening on :80'))})
-httpsServer.listen(443, ()=>{console.log(chalk.green('Https listening on :443'))})
-httpServer.use((req,res)=>{res.redirect('https://ryanwademontgomery.com')})
+if (process.env.MODE=='PROD'){
+  const SSL = require(__dirname+'/cert')
+  const httpServer = express()
+  httpServer
+    .listen(80, (err)=>{ console.log(chalk.green('Http listening on :80')) })
+    .use(hostValidation({ hosts: [process.env.IP,
+                                 process.env.domain,
+                                 process.env.altDomain, 
+                        }))
+    .use((req,res)=>{res.redirect('https://ryanwademontgomery.com')})
+
+  const httpsServer = https.createServer(SSL, server)
+  httpsServer.listen(443, ()=>{console.log(chalk.green('Https listening on :443'))})
+
+} else server.listen(80, ()=>{console.log(chalk.green('Test server running on :80'))})
 
 const { DateTime } = require('luxon');
 
 
-const wss = new ws.Server({ server:httpsServer });
+const wss = new ws.Server({ server:(process.env.MODE=='PROD')?httpsServer:server });
 
 //broadcast server status to all connected clients
 const broadcast = () =>{ wss.clients.forEach( (client)=> {
