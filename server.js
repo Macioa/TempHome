@@ -1,4 +1,6 @@
 const express = require('express')
+const http = require('http')
+const https = require('https')
 const ws = require('ws')
 var PORT = process.env.PORT || 80
 
@@ -9,12 +11,22 @@ router = require('./router')
 
 var server = express()
   .get('/',(req, res) => res.sendFile(__dirname+'/index.html') )
-  .listen(PORT, () => console.log(chalk.green(`Listening on ${ PORT }`)))
+
+
+server.use(express.static(__dirname, { dotfiles: 'allow' } ))
+const SSL = require(__dirname+'/cert')
+var httpServer = express()
+var httpsServer = https.createServer(SSL, server)
+
+
+httpServer.listen(80, ()=>{console.log(chalk.green('Http listening on :80'))})
+httpsServer.listen(443, ()=>{console.log(chalk.green('Https listening on :443'))})
+httpServer.use((req,res)=>{res.redirect('https://ryanwademontgomery.com')})
 
 const { DateTime } = require('luxon');
 
 
-const wss = new ws.Server({ server });
+const wss = new ws.Server({ server:httpsServer });
 
 //broadcast server status to all connected clients
 const broadcast = () =>{ wss.clients.forEach( (client)=> {

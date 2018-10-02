@@ -1,3 +1,8 @@
 **/node_modules
 localenv.js
 test.js
+cert.js
+cert.text
+Procfile
+*.pem
+*.sh
