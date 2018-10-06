@@ -25,9 +25,11 @@ if (process.env.MODE=='PROD'){
   const httpServer = express()
   httpServer
     .listen(80, (err)=>{ console.log(chalk.green('Http listening on :80')) })
-    .use(hostValidation({ hosts: [process.env.IP,
-                                 process.env.domain,
-                                 process.env.altDomain, 
+    .use(hostValidation({ hosts: [
+                                    process.env.IP,
+                                    process.env.domain,
+                                    process.env.altDomain, 
+                                 ]
                         }))
     .use((req,res)=>{res.redirect('https://ryanwademontgomery.com')})
 
