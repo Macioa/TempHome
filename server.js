@@ -7,12 +7,13 @@ var PORT = process.env.PORT || 80
 
 const chalk = require('chalk')
 
-router = require('./router')
+const router = require('./router')
 
+const APIrouter = require('./router/api')
 
 const server = express()
   .get('/',(req, res) => res.sendFile(__dirname+'/index.html') )
-  .get('*',(req, res) => res.send('404'))
+
 
 
 server.use(express.static(__dirname, { dotfiles: 'allow' } ))
@@ -34,9 +35,14 @@ if (process.env.MODE=='PROD'){
     .use((req,res)=>{res.redirect('https://ryanwademontgomery.com')})
 
   const httpsServer = https.createServer(SSL, server)
-  httpsServer.listen(443, ()=>{console.log(chalk.green('Https listening on :443'))})
+  httpsServer
+    .use('/api', APIrouter)
+    .listen(443, ()=>{console.log(chalk.green('Https listening on :443'))})
 
-} else server.listen(80, ()=>{console.log(chalk.green('Test server running on :80'))})
+} else 
+  server
+    .use('/api', APIrouter)
+    .listen(80, ()=>{console.log(chalk.green('Test server running on :80'))})
 
 const { DateTime } = require('luxon');
 
