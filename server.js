@@ -18,25 +18,26 @@ const server = express()
 
 server.use(express.static(__dirname, { dotfiles: 'allow' } ))
 
-const httpServer = express(server)
+var httpServer = null
 
+var httpsServer = null
 
 if (process.env.MODE=='PROD'){
   const SSL = require(__dirname+'/cert')
-  const httpServer = express()
+  httpServer = express(server)
   httpServer
-    .listen(80, (err)=>{ console.log(chalk.green('Http listening on :80')) })
     .use(hostValidation({ hosts: [
                                     process.env.IP,
                                     process.env.domain,
-                                    process.env.altDomain, 
+                                    //process.env.altDomain, 
                                  ]
                         }))
     .use((req,res)=>{res.redirect('https://ryanwademontgomery.com')})
+    .listen(80, (err)=>{ console.log(chalk.green('Http listening on :80')) })
 
-  const httpsServer = https.createServer(SSL, server)
+  httpsServer = https.createServer(SSL, server)
   httpsServer
-    .use('/api', APIrouter)
+ //   .use('/api', APIrouter)
     .listen(443, ()=>{console.log(chalk.green('Https listening on :443'))})
 
 } else 
