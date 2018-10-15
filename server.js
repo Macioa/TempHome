@@ -16,7 +16,9 @@ const server = express()
 
 
 
-server.use(express.static(__dirname, { dotfiles: 'allow' } ))
+server
+  .use(express.static(__dirname, { dotfiles: 'allow' } ))
+  .use('/api', APIrouter)
 
 var httpServer = null
 
@@ -27,9 +29,9 @@ if (process.env.MODE=='PROD'){
   httpServer = express(server)
   httpServer
     .use(hostValidation({ hosts: [
-                                    process.env.IP,
+                                    getIP(),
                                     process.env.domain,
-                                    //process.env.altDomain, 
+                                    process.env.altDomain, 
                                  ]
                         }))
     .use((req,res)=>{res.redirect('https://ryanwademontgomery.com')})
@@ -37,7 +39,6 @@ if (process.env.MODE=='PROD'){
 
   httpsServer = https.createServer(SSL, server)
   httpsServer
- //   .use('/api', APIrouter)
     .listen(443, ()=>{console.log(chalk.green('Https listening on :443'))})
 
 } else 
@@ -138,3 +139,11 @@ wss.clients.forEach((client) => {
 
 
   
+function getIP(){
+	let ifaces = os.networkInterfaces()
+	let usedInterfaces = Object.keys(ifaces)
+	usedInterfaces = usedInterfaces.filter(key=>!ifaces[key][0].internal)
+	let ip = ifaces[usedInterfaces[0]][0].address
+	if (ip) return ip
+	else throw 'Could not get current IP'
+}

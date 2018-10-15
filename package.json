@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Macioa/TempHome#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "bufferutil": "4.0.0",
     "chalk": "^2.4.1",
     "cryptography": "^1.2.3",
