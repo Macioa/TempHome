@@ -8,9 +8,10 @@ const models = require('../models/')
 
 const Authenticate = async (req,res,next)=>{
     try{
-        let key = models.key.find({where: {key:req.headers['auth-email']}})
-        if (key&&(key.key===)){
+        let key = await models.key.find({where: {email:req.headers['auth-email']}})
 
+        if (key&&(key.key===req.headers['auth-key'])){
+            next();
         } else {
             res.json({
                 status: 403,
@@ -24,10 +25,6 @@ const Authenticate = async (req,res,next)=>{
             data: err
         })
     }
-    console.log('MIDDLE')
-    console.log(req.headers['auth-email'])
-
-    next()
 }
 
 Router.post('/newkey', (req,res)=>{
