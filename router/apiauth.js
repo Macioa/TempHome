@@ -18,7 +18,6 @@ const Authenticate = async (req,res,next)=>{
                 data: "Not authorized"
             })
         }
-
     } catch (err) {
         res.json({
             status: 400,
