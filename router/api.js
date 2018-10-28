@@ -54,26 +54,13 @@ Router.get('/logs', async (req, res) => {
 
         if (userQuery['names']||userQuery['recentName']||userQuery['ip']){
 
-            let users = await models.user.findAll({where: processQuery(userQuery)})
+            let uQuery = processQuery(userQuery), lQuery = processQuery(req.query)
 
-            if (!users.length) {
-                res.json({
-                    status:200,
-                    data:"No users found for search criteria"
-                })
-                return }
+            let users = await models.user.findAll({where: uQuery})
 
-            chats = await models.chat.findAll({where: processQuery(req.query)})
+            Object.assign(lQuery, { ip : users.map(user=>user.ip) })
 
-            if (users.length) chats.forEach(chat=>{
-                chat.match = false
-                users.forEach((user)=>{ if (user.ip==chat.ip) {
-                    chat.match = true
-                    chat.dataValues.user = user.recentName
-                    }})
-            })
-
-            chats = chats.filter(chat => chat.match)
+            chats = await models.chat.findAll({where: lQuery})
 
         } else { 
             chats = await models.chat.findAll({where: processQuery(req.query)}) 
